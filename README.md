@@ -1,2 +1,2 @@
-# springboot-rabbitImq
+# springboot-rabbitmq
 springboot-raabitImq
