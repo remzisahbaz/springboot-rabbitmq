@@ -11,8 +11,10 @@ public class MessageProducer {
     @Value ("${message.rabbitmq.routing.name}")
     private String routingName;
 
-    private final RabbitTemplate rabbitTemplate;
+    @Value("${message.rabbitmq.exchange.name}")
+    private String exchangeName;
 
+    private final RabbitTemplate rabbitTemplate;
     public MessageProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
@@ -20,8 +22,9 @@ public class MessageProducer {
     public void senToQueue(ListenerMessage message) {
         //üretilen mesaj istenilen formata çevrilip gönderiliyor.
         //hangi queueName gideceğinide belirtiyoruz
-        System.out.println("Mesagge Sent Id:"+message.getId());
-        rabbitTemplate.convertAndSend(routingName, message);
+        System.out.println("Message Sent Id:" + message.getId());
+     //   System.out.println(message + "exchangeName: " +exchangeName+" routingName: "+routingName);
+        rabbitTemplate.convertAndSend(exchangeName,routingName, message);
 
 
     }
